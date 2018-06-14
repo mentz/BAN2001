@@ -1,11 +1,23 @@
 #include <iostream>
+#include <stringstream>
 #include <cstdio>
 #include <cstdlib>
 
 using namespace std;
 
-map<string, int> locks; // variavel 'a'  esta com 'tal' transacao
-map<int, int> transacoes; // guarda transacoes ativas
+struct Operation
+{
+	enum tipo {START, READ, WRITE, COMMIT};
+	string dado;
+};
+
+struct Transaction
+{
+	int qtde;
+	vector<Operation> operacoes;
+};
+
+vector<Transaction> transacoes;
 
 int main(int argc, char **argv)
 {
